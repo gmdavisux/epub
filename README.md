@@ -10,7 +10,7 @@ These notes were origninally for me. I have been part of an epub (ebook) project
 The above comand-line takes the contents of the current directory and creates a package with mimetype first, without any of the invisible Mac files. It's important you have aready used 'cd' to point to the correct folder with all your epub files.
 
 [How to install and run EpubCheck on Mac OS X from the command line](http://rcliff.com/blog/how-to-install-and-run-epubcheck-on-mac-os-x-from-the-command-line/)
-This helped me install the command line offical [EPUBCheck](https://github.com/w3c/epubcheck/wiki) app from W3C. EPUBCheck will validate the package and files within.
+This helped me install the command line offical [EPUBCheck](https://github.com/w3c/epubcheck/wiki) app from W3C. EPUBCheck will validate the package and files within. It is a command-line tool but easy enough to use.
 
 [W3C Epub 3.2 Specifciaton](https://www.w3.org/publishing/epub3/epub-spec.html) – IMHO, the W3C has some of the most difficult to to read and understand documentation ever created. This is not a good source but the ultimate source of truth.
 
