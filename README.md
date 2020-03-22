@@ -16,6 +16,15 @@ This helped me install the command line offical [EPUBCheck](https://github.com/w
 
 [Blitz ebook Tricks](https://friendsofepub.github.io/eBookTricks/) I have only just started to look at this. Looks to be a great resource. There is a ling list of helpful CSS to fix thinkgs like line height and image sizing. 
 
+### Google Docs EPUB output
+Google docs does some work for but and maybe creates a lot of work too. Here are some things I found out.
+* No cover Image: You can add one yourself if you account for it in the manifest
+* No title attribute in the nav.xhtml file. A title attribute is required in the head. Just copy it form the main document and paste it here
+* Fonts may be declared as remote resouces in the main document. However they arent declared as required in the OPF. If this happens you can either delete the referrence from the style block (my preference), add this reference in the package file manually or include the font in the package.
+* Related to above, fonts are imported as remote resources but the font declarations have no falls backs. A font-family may be specified "Roboto" without even sans-serif as an alternative. This is not good for lots of reasons including lack of reliable access to the internet inherent to ebook readers.
+* most links will show up as ` href="https://www.google.com/url?q=https://example.com">` search and replace to remove `https://www.google.com/url?q=` This not absolutely neccessary but prudent.
+* Images come in with a lot of inline styling. and a span wrapper with more inline styling. This has to be removed if you want to make the images scaleable. CSS below for that.
+
 ### CSS (at the moment)
 I am using GoogleDocs to create the ebook. I then add a cover image and the additional CSS below to fix the issues I see. (lots form Blitz link above) I also want to alter all of the GoogleDocs css but alas they are not trying to output eficient code. I'd liek to replace it all with my own and not include the external fonts (but provide a font stack). That will come but for now, here it is. 
 
@@ -34,6 +43,7 @@ I am using GoogleDocs to create the ebook. I then add a cover image and the addi
                 -webkit-text-fill-color: inherit;
             }
             img{object-fit: contain; max-width: 90%; max-height: 90%;}
+            /*images need to have any inline styling removed*/
             h1, h2, h3{
                 line-height: 1.5;
                 page-break-after: avoid;
