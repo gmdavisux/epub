@@ -5,7 +5,7 @@ These notes were origninally for me. I have been part of an epub (ebook) project
 ### Helpful Links
 [How to repack an epub file from command line](https://ebooks.stackexchange.com/questions/257/how-to-repack-an-epub-file-from-command-line) Really so much better than uzing a GUI zip app and renaming. The big killer is getting the mimetype file to be the first one in the archive. There are several replies to this. Read the first few to find what you need. For me, using a Mac has it's own challenges which someone already solved for me.
 
-`zip -rX "../myprecious.epub" mimetype $(ls|xargs echo|sed 's/mimetype//g') -x *.DS_Store`
+`zip -rX "../myprecious.epub" mimetype $(ls|xargs echo|sed 's/mimetype//g') -x "*.DS_Store"`
 
 The above comand-line takes the contents of the current directory and creates a package with mimetype first, without any of the invisible Mac files. It's important you have aready used 'cd' to point to the correct folder with all your epub files.
 
@@ -17,12 +17,11 @@ This helped me install the command line offical [EPUBCheck](https://github.com/w
 [Blitz ebook Tricks](https://friendsofepub.github.io/eBookTricks/) I have only just started to look at this. Looks to be a great resource. There is a ling list of helpful CSS to fix thinkgs like line height and image sizing. 
 
 ### Google Docs EPUB output
-Google docs does some work for but and maybe creates a lot of work too. Here are some things I found out.
+Google docs does some work for you but maybe creates a lot of work too. Here are some things I found out.
 * No cover Image: You can add one yourself if you account for it in the manifest
 * No title attribute in the nav.xhtml file. A title attribute is required in the head. Just copy it form the main document and paste it here
 * Fonts may be declared as remote resouces in the main document. However they arent declared as required in the OPF. If this happens you can either delete the referrence from the style block (my preference), add this reference in the package file manually or include the font in the package.
 * Related to above, fonts are imported as remote resources but the font declarations have no falls backs. A font-family may be specified "Roboto" without even sans-serif as an alternative. This is not good for lots of reasons including lack of reliable access to the internet inherent to ebook readers.
-* most links will show up as ` href="https://www.google.com/url?q=https://example.com">` search and replace to remove `https://www.google.com/url?q=` This not absolutely neccessary but prudent.
 * Images come in with a lot of inline styling. and a span wrapper with more inline styling. This has to be removed if you want to make the images scaleable. CSS below for that.
 
 ### CSS (at the moment)
