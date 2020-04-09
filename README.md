@@ -19,10 +19,13 @@ This helped me install the command line offical [EPUBCheck](https://github.com/w
 ### Google Docs EPUB output
 Google docs does some work for you but maybe creates a lot of work too. Here are some things I found out.
 * No cover Image: You can add one yourself if you account for it in the manifest
-* No title attribute in the nav.xhtml file. A title attribute is required in the head. Just copy it form the main document and paste it here
+* No title attribute in the nav.xhtml file. A title attribute is required in the head. Just copy it from the main document and paste it here
 * Fonts may be declared as remote resouces in the main document. However they arent declared as required in the OPF. If this happens you can either delete the referrence from the style block (my preference), add this reference in the package file manually or include the font in the package.
 * Related to above, fonts are imported as remote resources but the font declarations have no falls backs. A font-family may be specified "Roboto" without even sans-serif as an alternative. This is not good for lots of reasons including lack of reliable access to the internet inherent to ebook readers.
 * Images come in with a lot of inline styling. and a span wrapper with more inline styling. This has to be removed if you want to make the images scaleable. CSS below for that.
+* Links are all redirects from a google url. This means that external links in the book will be a bad experience. To fix this, you need to remove the first part of each URL, then remove the reference parameters after the desired URL. lastly, you need to make sure any html encoded characters Like "#" or "=" are decoded. If you don't fix this, the following will play out:
+    1. The user selects the link, then your tablet will warn that this is an external link (that part is normal).
+    1. The user selects OK in the warning then the browser opens with another warning from that this is an external link.
 * CSS in in a block in the main xhtml file. It's all run together and difficult to read so it needs formatting to work on it. The beginning of the document contains named styles you may have used in Google Docs. The rest are classes with a similar format to c1. You could leave these as is but be warned they will change their meaning between exports! For example: c1 may be font-style:italic in one version then mean font-size:11px; inthe next. I dont have a great way to deal with this but be aware. Also those styles do carry font sizes, alignments, families and more so they can be problematic.
 
 ### CSS (at the moment)
